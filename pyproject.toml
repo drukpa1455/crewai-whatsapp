@@ -1,0 +1,20 @@
+[project]
+name = "whatsapp_group_activity_summary_crew_formation"
+version = "0.1.0"
+description = "whatsapp_group_activity_summary_crew_formation using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<=3.13"
+dependencies = [
+    "crewai[tools]>=0.86.0,<1.0.0"
+]
+
+[project.scripts]
+whatsapp_group_activity_summary_crew_formation = "whatsapp_group_activity_summary_crew_formation.main:run"
+run_crew = "whatsapp_group_activity_summary_crew_formation.main:run"
+train = "whatsapp_group_activity_summary_crew_formation.main:train"
+replay = "whatsapp_group_activity_summary_crew_formation.main:replay"
+test = "whatsapp_group_activity_summary_crew_formation.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

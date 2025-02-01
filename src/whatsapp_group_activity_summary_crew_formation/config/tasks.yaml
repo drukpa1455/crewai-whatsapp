@@ -1,0 +1,26 @@
+---
+receive_messages_task:
+  description: Use the WhatsApp API to receive messages from the specified group chat
+    with ID {group_id}.
+  expected_output: A collection of messages received from the WhatsApp group with
+    ID {group_id}.
+  async_execution: false
+  agent: message_handler
+summarize_messages_task:
+  description: Analyze the received messages from the WhatsApp group with ID {group_id}
+    and summarize them into a concise daily summary.
+  expected_output: A concise summary of the daily messages from the WhatsApp group
+    with ID {group_id}.
+  async_execution: false
+  agent: summarization_expert
+  context:
+  - receive_messages_task
+send_summary_task:
+  description: Use the WhatsApp API to send the summarized messages back to the group
+    with ID {group_id} every morning at {scheduled_time}.
+  expected_output: The daily summary sent to the WhatsApp group with ID {group_id}
+    at {scheduled_time}.
+  async_execution: false
+  agent: message_handler
+  context:
+  - summarize_messages_task
