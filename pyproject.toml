@@ -10,7 +10,9 @@ dependencies = [
     "pyyaml>=6.0.1",
     "requests>=2.31.0",
     "pytz>=2024.1",
-    "python-dotenv>=1.0.0"
+    "python-dotenv>=1.0.0",
+    "schedule>=1.2.1",
+    "regex>=2023.12.25"
 ]
 
 [project.scripts]
@@ -26,4 +28,11 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = []
+dev-dependencies = [
+    "pytest>=7.4.4",
+    "pytest-mock>=3.12.0",
+    "pytest-cov>=4.1.0",
+    "black>=24.1.1",
+    "isort>=5.13.2",
+    "mypy>=1.8.0"
+]
