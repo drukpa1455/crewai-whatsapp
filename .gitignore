@@ -46,4 +46,14 @@ Thumbs.db
 
 # Logs
 *.log
-logs/ 
+logs/
+
+# Data storage
+data/messages/current/*
+!data/messages/current/.gitkeep
+data/messages/archive/*
+!data/messages/archive/.gitkeep
+data/summaries/current/*
+!data/summaries/current/.gitkeep
+data/summaries/archive/*
+!data/summaries/archive/.gitkeep 
