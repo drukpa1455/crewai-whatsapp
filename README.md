@@ -1,115 +1,188 @@
-# WhatsappGroupActivitySummaryCrewFormation Crew
+# WhatsApp Group Activity Summary 🤖
 
-Welcome to the WhatsappGroupActivitySummaryCrewFormation Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+[![CrewAI](https://img.shields.io/badge/built%20with-CrewAI-blue.svg)](https://crewai.com)
+[![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-## Installation
+An intelligent AI system that monitors WhatsApp group chats and provides automated daily summaries. Built with [CrewAI](https://crewai.com), this project leverages multiple AI agents working together to analyze and summarize group conversations effectively.
 
-Ensure you have Python >=3.10 <=3.13 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+## 🌟 Features
 
-First, if you haven't already, install uv:
+- 🤖 Multi-agent AI system for intelligent message processing
+- 📱 WhatsApp Business API integration
+- 📊 Daily group activity summaries
+- ⏰ Automated scheduling of summaries
+- 🔍 Smart message analysis and topic identification
+- 🎯 Customizable summary formats and timing
 
-```bash
-pip install uv
-```
+## 🚀 Quick Start
 
-Next, navigate to your project directory and install the dependencies:
+### Prerequisites
 
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
+- Python >=3.10 <=3.13
+- [UV](https://docs.astral.sh/uv/) package manager
+- WhatsApp Business Account
+- OpenAI API key
 
-## WhatsApp Setup
+### Installation
 
-This project uses the WhatsApp Business API to send and receive messages. Follow these steps to set up WhatsApp integration:
-
-1. **Create a WhatsApp Business Account**:
-   - Go to the [Meta Developer Portal](https://developers.facebook.com/)
-   - Create a new app or use an existing one
-   - Add the WhatsApp product to your app
-   - Set up a WhatsApp Business Account
-
-2. **Get API Credentials**:
-   - In your app's dashboard, go to WhatsApp > API Setup
-   - Note down your:
-     - Phone Number ID
-     - Access Token
-     - API Version (default is v17.0)
-
-3. **Configure Webhook**:
-   - In your app's dashboard, go to WhatsApp > Configuration
-   - Set up a webhook URL where you'll receive messages
-   - Subscribe to the necessary webhook events (messages, message_status)
-
-4. **Update Configuration**:
-   - Copy `src/whatsapp_group_activity_summary_crew_formation/config/whatsapp_config.example.yaml` to `whatsapp_config.yaml`
-   - Update the configuration with your:
-     ```yaml
-     whatsapp:
-       api_version: "v17.0"
-       phone_number_id: "your_phone_number_id"
-       access_token: "your_access_token"
-       group_id: "your_group_id"
-       summary_time: "08:00"
-       timezone: "UTC"
-     ```
-
-5. **Environment Variables**:
-   Create a `.env` file in the root directory with:
-   ```
-   OPENAI_API_KEY=your_openai_api_key
+1. **Install UV Package Manager**:
+   ```bash
+   pip install uv
    ```
 
-### Customizing
+2. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/yourusername/whatsapp-group-summary.git
+   cd whatsapp-group-summary
+   ```
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+3. **Install Dependencies**:
+   ```bash
+   crewai install
+   ```
 
-- Modify `src/whatsapp_group_activity_summary_crew_formation/config/agents.yaml` to define your agents
-- Modify `src/whatsapp_group_activity_summary_crew_formation/config/tasks.yaml` to define your tasks
-- Modify `src/whatsapp_group_activity_summary_crew_formation/crew.py` to add your own logic, tools and specific args
-- Modify `src/whatsapp_group_activity_summary_crew_formation/main.py` to add custom inputs for your agents and tasks
+## 🔧 Configuration
 
-## Running the Project
+### 1. WhatsApp Business Setup
 
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
+#### Create WhatsApp Business Account
+1. Visit [Meta Developer Portal](https://developers.facebook.com/)
+2. Create a new app or select existing one
+3. Add WhatsApp product to your app
+4. Complete business verification if required
 
+#### API Setup
+1. Navigate to WhatsApp > API Setup in your app dashboard
+2. Collect required credentials:
+   - Phone Number ID
+   - Access Token
+   - API Version (v17.0 recommended)
+
+#### Webhook Configuration
+1. Go to WhatsApp > Configuration
+2. Set up webhook URL for receiving messages
+3. Configure webhook events:
+   - `messages` - For receiving group messages
+   - `message_status` - For delivery confirmations
+
+### 2. Project Configuration
+
+#### WhatsApp Configuration
+Create your configuration file:
 ```bash
-$ crewai run
+cp src/whatsapp_group_activity_summary_crew_formation/config/whatsapp_config.example.yaml whatsapp_config.yaml
 ```
 
-This command initializes the whatsapp_group_activity_summary_crew_formation Crew, assembling the agents and assigning them tasks as defined in your configuration.
+Update with your credentials:
+```yaml
+whatsapp:
+  api_version: "v17.0"
+  phone_number_id: "your_phone_number_id"
+  access_token: "your_access_token"
+  group_id: "your_group_id"
+  summary_time: "08:00"
+  timezone: "UTC"
+```
 
-The agents will:
-1. Monitor your specified WhatsApp group for messages
-2. Analyze and summarize the group's activity
-3. Send a daily summary at the configured time
+#### Environment Variables
+Create `.env` file in project root:
+```bash
+echo "OPENAI_API_KEY=your_openai_api_key" > .env
+```
 
-## Understanding Your Crew
+## 🎮 Usage
 
-The whatsapp_group_activity_summary_crew_formation Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+### Running the Project
+
+Start the AI crew:
+```bash
+crewai run
+```
+
+### Customization
+
+Modify agent behaviors and tasks in:
+- `config/agents.yaml` - Agent definitions
+- `config/tasks.yaml` - Task configurations
+- `crew.py` - Core logic and tools
+- `main.py` - Input handling and execution flow
+
+## 🤖 Understanding the AI Crew
 
 ### Agent Roles
 
-1. **Message Handling Specialist**:
-   - Manages WhatsApp API integration
-   - Receives and processes group messages
-   - Sends summarized content back to the group
+#### 1. Message Handling Specialist
+- **Purpose**: Manages WhatsApp communication
+- **Responsibilities**:
+  - API integration management
+  - Message reception and processing
+  - Summary distribution
+- **Tools**: WhatsApp Business API, HTTP clients
 
-2. **Summarization Specialist**:
-   - Analyzes group messages
-   - Creates concise, meaningful summaries
-   - Identifies key topics and trends
+#### 2. Summarization Specialist
+- **Purpose**: Content analysis and synthesis
+- **Responsibilities**:
+  - Message analysis
+  - Topic identification
+  - Summary generation
+- **Tools**: NLP models, text analysis tools
 
-## Support
+### Workflow
+1. Message Handler receives group messages
+2. Summarization Specialist analyzes content
+3. Key topics and trends are identified
+4. Daily summary is generated
+5. Summary is sent back to the group
 
-For support, questions, or feedback regarding the WhatsappGroupActivitySummaryCrewFormation Crew or crewAI:
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+## 📝 Example Summary Format
 
-For WhatsApp Business API specific questions:
+```
+📝 Daily Group Summary
+Date: 2024-02-01
+
+🔑 Key Discussions:
+- Topic 1: Brief overview
+- Topic 2: Main points discussed
+
+📊 Activity Overview:
+- Total Messages: XX
+- Active Participants: XX
+- Peak Activity Time: XX:XX
+
+🎯 Action Items:
+- Action 1
+- Action 2
+
+#DailySummary
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 🆘 Support
+
+### CrewAI Support
+- [Documentation](https://docs.crewai.com)
+- [GitHub Repository](https://github.com/joaomdmoura/crewai)
+- [Discord Community](https://discord.com/invite/X4JWnZnxPb)
+- [Documentation Chat](https://chatg.pt/DWjSBZn)
+
+### WhatsApp API Support
 - [WhatsApp Business API Documentation](https://developers.facebook.com/docs/whatsapp)
-- [Meta for Developers Support](https://developers.facebook.com/support)
+- [Meta Developers Support](https://developers.facebook.com/support)
 
-Let's create wonders together with the power and simplicity of crewAI.
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Built with ❤️ using [CrewAI](https://crewai.com)
