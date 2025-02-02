@@ -3,8 +3,8 @@ from crewai.project import CrewBase, agent, crew, task
 
 
 @CrewBase
-class WhatsappGroupActivitySummaryCrewFormationCrew():
-    """WhatsappGroupActivitySummaryCrewFormation crew"""
+class WhatsappCrew():
+    """WhatsApp Group Activity Summary Crew"""
 
     @agent
     def message_handler(self) -> Agent:
@@ -45,7 +45,7 @@ class WhatsappGroupActivitySummaryCrewFormationCrew():
 
     @crew
     def crew(self) -> Crew:
-        """Creates the WhatsappGroupActivitySummaryCrewFormation crew"""
+        """Creates the WhatsApp Group Activity Summary Crew"""
         return Crew(
             agents=self.agents, # Automatically created by the @agent decorator
             tasks=self.tasks, # Automatically created by the @task decorator

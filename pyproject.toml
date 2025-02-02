@@ -1,5 +1,5 @@
 [project]
-name = "whatsapp-group-activity-summary-crew-formation"
+name = "whatsapp-crew"
 version = "0.1.0"
 description = "A CrewAI project for summarizing WhatsApp group activity"
 authors = [{ name = "Your Name", email = "you@example.com" }]
@@ -14,11 +14,11 @@ dependencies = [
 ]
 
 [project.scripts]
-whatsapp_group_activity_summary_crew_formation = "whatsapp_group_activity_summary_crew_formation.main:run"
-run_crew = "whatsapp_group_activity_summary_crew_formation.main:run"
-train = "whatsapp_group_activity_summary_crew_formation.main:train"
-replay = "whatsapp_group_activity_summary_crew_formation.main:replay"
-test = "whatsapp_group_activity_summary_crew_formation.main:test"
+whatsapp_crew = "whatsapp_crew.main:run"
+run_crew = "whatsapp_crew.main:run"
+train = "whatsapp_crew.main:train"
+replay = "whatsapp_crew.main:replay"
+test = "whatsapp_crew.main:test"
 
 [build-system]
 requires = ["hatchling"]

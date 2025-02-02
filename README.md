@@ -4,7 +4,23 @@
 [![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-An intelligent AI system that monitors WhatsApp group chats and provides automated daily summaries. Built with [CrewAI](https://crewai.com), this project leverages multiple AI agents working together to analyze and summarize group conversations effectively.
+Transform your WhatsApp group chats into organized, insightful summaries with the power of AI. This intelligent system uses a team of AI agents to monitor group conversations, identify key discussions, and automatically generate comprehensive daily summaries.
+
+### Why This Project?
+- 📚 **Information Overload**: Keep up with busy group chats without reading every message
+- 🎯 **Key Insights**: Never miss important discussions or decisions
+- ⏰ **Time Saving**: Get daily summaries delivered automatically
+- 🤝 **Better Collaboration**: Keep everyone informed with minimal effort
+
+Built with [CrewAI](https://crewai.com), this project demonstrates the power of multi-agent AI systems working together. The Message Handler manages WhatsApp communication while the Summarization Specialist analyzes content, creating a seamless automated summary pipeline.
+
+### Perfect For:
+- 🏢 Business Teams
+- 👥 Community Groups
+- 📚 Study Groups
+- 🌐 Remote Teams
+- 📊 Project Management
+- 🤝 Networking Groups
 
 ## 🌟 Features
 
@@ -71,7 +87,7 @@ An intelligent AI system that monitors WhatsApp group chats and provides automat
 #### WhatsApp Configuration
 Create your configuration file:
 ```bash
-cp src/whatsapp_group_activity_summary_crew_formation/config/whatsapp_config.example.yaml whatsapp_config.yaml
+cp src/whatsapp_crew/config/whatsapp_config.example.yaml whatsapp_config.yaml
 ```
 
 Update with your credentials:

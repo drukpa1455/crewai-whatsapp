@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys
-from whatsapp_group_activity_summary_crew_formation.crew import WhatsappGroupActivitySummaryCrewFormationCrew
+from whatsapp_crew.crew import WhatsappCrew
 
 # This main file is intended to be a way for your to run your
 # crew locally, so refrain from adding unnecessary logic into this file.
@@ -15,7 +15,7 @@ def run():
         'group_id': 'sample_value',
         'scheduled_time': 'sample_value'
     }
-    WhatsappGroupActivitySummaryCrewFormationCrew().crew().kickoff(inputs=inputs)
+    WhatsappCrew().crew().kickoff(inputs=inputs)
 
 
 def train():
@@ -27,7 +27,7 @@ def train():
         'scheduled_time': 'sample_value'
     }
     try:
-        WhatsappGroupActivitySummaryCrewFormationCrew().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+        WhatsappCrew().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
@@ -37,7 +37,7 @@ def replay():
     Replay the crew execution from a specific task.
     """
     try:
-        WhatsappGroupActivitySummaryCrewFormationCrew().crew().replay(task_id=sys.argv[1])
+        WhatsappCrew().crew().replay(task_id=sys.argv[1])
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
@@ -51,7 +51,7 @@ def test():
         'scheduled_time': 'sample_value'
     }
     try:
-        WhatsappGroupActivitySummaryCrewFormationCrew().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
+        WhatsappCrew().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while testing the crew: {e}")
