@@ -1,59 +1,52 @@
 ---
-receive_messages_task:
-  description: >
-    Receive messages from WhatsApp group {group_id} and store them in the data directory
-    following the defined JSON format. Maintain proper file organization in
-    data/messages/current/YYYY-MM-DD/ and handle archival of older messages.
-  expected_output: >
-    JSON files containing the day's messages stored in the appropriate directory,
-    with proper metadata and organization according to the storage specification.
-  async_execution: false
-  agent: message_handler
-  tools:
-    - WhatsAppAPI
-    - MessageStorage
+tasks:
+  message_monitoring:
+    description: Monitor and process incoming WhatsApp messages
+    agent: message_handler
+    tools:
+      - WhatsAppTool
+      - MessageStorage
+    schedule: continuous
+    dependencies: []
 
-summarize_messages_task:
-  description: >
-    Read messages from data/messages/current/, apply filtering rules and topic
-    classification, and generate a comprehensive daily summary for group {group_id}.
-    Store the summary in both JSON and Markdown formats following the templates.
-  expected_output: >
-    Daily summary stored in data/summaries/current/YYYY-MM-DD/ in both JSON and
-    Markdown formats, with proper categorization and metadata.
-  async_execution: false
-  agent: summarization_expert
-  context:
-    - receive_messages_task
-  tools:
-    - MessageAnalyzer
-    - SummaryGenerator
+  message_storage:
+    description: Store and organize processed messages
+    agent: message_handler
+    tools:
+      - MessageStorage
+    schedule: on_message
+    dependencies:
+      - message_monitoring
 
-send_summary_task:
-  description: >
-    Read the generated summary from data/summaries/current/YYYY-MM-DD/,
-    format it according to the WhatsApp message template, and send it to
-    group {group_id} at {scheduled_time}. Handle any delivery confirmations.
-  expected_output: >
-    Summary successfully sent to the WhatsApp group, with delivery confirmation
-    stored in the summary metadata.
-  async_execution: false
-  agent: message_handler
-  context:
-    - summarize_messages_task
-  tools:
-    - WhatsAppAPI
-    - DataRetrieval
+  message_analysis:
+    description: Analyze message content and extract insights
+    agent: summarization_expert
+    tools:
+      - MessageAnalyzer
+    schedule: daily
+    dependencies:
+      - message_storage
 
-archive_data_task:
-  description: >
-    Manage data retention by moving messages and summaries older than their
-    retention period to the archive directories. Compress files according to
-    the retention policy.
-  expected_output: >
-    Outdated files moved to appropriate archive locations and compressed
-    according to retention policy rules.
-  async_execution: true
-  agent: message_handler
-  tools:
-    - DataArchival
+  summary_generation:
+    description: Generate and store daily activity summaries
+    agent: summarization_expert
+    tools:
+      - MessageAnalyzer
+      - SummaryStorage
+    schedule:
+      cron: "0 0 * * *"  # Daily at midnight
+      timezone: "{timezone}"
+    dependencies:
+      - message_analysis
+
+  summary_distribution:
+    description: Send generated summaries to WhatsApp group
+    agent: message_handler
+    tools:
+      - WhatsAppTool
+      - SummaryStorage
+    schedule:
+      cron: "0 8 * * *"  # Daily at 8 AM
+      timezone: "{timezone}"
+    dependencies:
+      - summary_generation

@@ -11,9 +11,8 @@ message_handler:
     Your expertise ensures seamless interaction between WhatsApp and the local system,
     while keeping message history properly archived and accessible.
   tools:
-    - WhatsAppAPI
+    - WhatsAppTool
     - MessageStorage
-    - DataArchival
 
 summarization_expert:
   role: Summarization Specialist
@@ -28,6 +27,4 @@ summarization_expert:
     enable you to efficiently process messages and generate well-organized reports.
   tools:
     - MessageAnalyzer
-    - TopicClassifier
-    - SummaryGenerator
-    - DataRetrieval
+    - SummaryStorage

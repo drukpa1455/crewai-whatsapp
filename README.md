@@ -126,52 +126,153 @@ Modify agent behaviors and tasks in:
 
 ## 🤖 Understanding the AI Crew
 
-### Agent Roles
+### Agent Roles and Tools
 
 #### 1. Message Handling Specialist
-- **Purpose**: Manages WhatsApp communication
+- **Purpose**: Manages WhatsApp communication and message processing
 - **Responsibilities**:
-  - API integration management
-  - Message reception and processing
-  - Summary distribution
-- **Tools**: WhatsApp Business API, HTTP clients
+  - Monitors group chat activity using WhatsApp Business API
+  - Processes incoming messages and extracts metadata
+  - Handles message storage and retrieval
+  - Manages message retention and archival
+- **Tools**: 
+  - `whatsapp_tool.py`: WhatsApp Business API integration
+  - `message_storage.py`: Message persistence and retrieval
+  - `custom_tool.py`: Custom tool extensions
 
 #### 2. Summarization Specialist
-- **Purpose**: Content analysis and synthesis
+- **Purpose**: Analyzes content and generates insightful summaries
 - **Responsibilities**:
-  - Message analysis
-  - Topic identification
-  - Summary generation
-- **Tools**: NLP models, text analysis tools
+  - Performs message analysis and classification
+  - Generates and stores daily summaries
+  - Maintains summary archives
+  - Implements summary templates
+- **Tools**: 
+  - `message_analyzer.py`: Content analysis and classification
+  - `summary_storage.py`: Summary persistence and retrieval
 
-### Workflow
-1. Message Handler receives group messages
-2. Summarization Specialist analyzes content
-3. Key topics and trends are identified
-4. Daily summary is generated
-5. Summary is sent back to the group
+### Tool Implementations
 
-## 📝 Example Summary Format
+#### WhatsApp Tool (`whatsapp_tool.py`)
+- WhatsApp Business API integration
+- Message sending and receiving
+- Group chat management
+- Error handling and retry logic
 
-```
-📝 Daily Group Summary
-Date: 2024-02-01
+#### Message Analyzer (`message_analyzer.py`)
+- Content analysis and classification
+- Topic identification
+- Action item extraction
+- Sentiment analysis
+- Mention and hashtag processing
 
-🔑 Key Discussions:
-- Topic 1: Brief overview
-- Topic 2: Main points discussed
+#### Message Storage (`message_storage.py`)
+- Message persistence
+- Data organization
+- Retention policy implementation
+- Query and retrieval functions
 
-📊 Activity Overview:
-- Total Messages: XX
-- Active Participants: XX
-- Peak Activity Time: XX:XX
+#### Summary Storage (`summary_storage.py`)
+- Summary document management
+- Template handling
+- Archive organization
+- Export functionality
 
-🎯 Action Items:
-- Action 1
-- Action 2
+#### Custom Tool (`custom_tool.py`)
+- Template for implementing custom functionality
+- Provides base structure for new tools:
+  - Input schema definition
+  - Tool description
+  - Execution logic
+- Can be extended for:
+  - Custom message filters
+  - Special processing rules
+  - Integration with additional services
+  - Custom analytics
+  - Specialized data transformations
 
-#DailySummary
-```
+### Tasks and Scheduling
+
+The system operates through five main tasks, each with specific responsibilities and scheduling:
+
+#### 1. Message Monitoring
+- **Agent**: Message Handling Specialist
+- **Tools**: WhatsApp Tool, Message Storage
+- **Schedule**: Continuous operation
+- **Purpose**: Real-time monitoring and processing of incoming messages
+
+#### 2. Message Storage
+- **Agent**: Message Handling Specialist
+- **Tools**: Message Storage, Custom Tool
+- **Schedule**: Triggered on message receipt
+- **Purpose**: Organized storage and management of processed messages
+- **Dependencies**: Message Monitoring
+
+#### 3. Message Analysis
+- **Agent**: Summarization Specialist
+- **Tools**: Message Analyzer
+- **Schedule**: Daily execution
+- **Purpose**: Content analysis and insight extraction
+- **Dependencies**: Message Storage
+
+#### 4. Summary Generation
+- **Agent**: Summarization Specialist
+- **Tools**: Message Analyzer, Summary Storage
+- **Schedule**: Daily at midnight (UTC by default)
+- **Purpose**: Creation of comprehensive daily summaries
+- **Dependencies**: Message Analysis
+
+#### 5. Summary Distribution
+- **Agent**: Message Handling Specialist
+- **Tools**: WhatsApp Tool, Summary Storage
+- **Schedule**: Daily at 8:00 AM (UTC by default)
+- **Purpose**: Delivery of generated summaries to the WhatsApp group
+- **Dependencies**: Summary Generation
+
+### System Workflow
+
+The system follows a sequential workflow:
+
+1. **Continuous Monitoring**: The Message Handler continuously monitors the WhatsApp group for new messages using the WhatsApp Tool.
+
+2. **Message Processing**:
+   - New messages are immediately processed and stored
+   - Messages are organized by date and metadata
+   - Custom processing rules can be applied through the Custom Tool
+
+3. **Daily Analysis**:
+   - Messages are analyzed for content and context
+   - Key topics and trends are identified
+   - Action items and important information are extracted
+
+4. **Summary Creation**:
+   - Daily summaries are generated at midnight
+   - Content is organized by topic and importance
+   - Summaries are stored in both JSON and formatted text
+
+5. **Distribution**:
+   - Formatted summaries are sent to the WhatsApp group at 8:00 AM
+   - Delivery confirmations are tracked
+   - Any distribution issues are handled with retry logic
+
+### Customization Options
+
+You can customize the system behavior by modifying:
+
+1. **Scheduling**:
+   - Adjust summary generation time in `tasks.yaml`
+   - Modify distribution schedule
+   - Change timezone settings
+
+2. **Processing Rules**:
+   - Implement custom message filters
+   - Add new analysis criteria
+   - Create custom summary formats
+
+3. **Storage Policies**:
+   - Configure retention periods
+   - Modify archival rules
+   - Adjust storage organization
 
 ## 🤝 Contributing
 
