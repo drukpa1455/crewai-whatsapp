@@ -1,0 +1,51 @@
+exclude_patterns:
+  # Common non-content messages
+  - "^(👍|👌|✅|🙏|❤️)$"  # Single emoji reactions
+  - "^(ok|okay|yes|no|thanks|ty)$"  # Simple acknowledgments
+  - "^(\+1|-1)$"  # Simple agreements/disagreements
+  
+  # Media messages without context
+  - "image omitted"
+  - "video omitted"
+  - "audio omitted"
+  - "document omitted"
+  
+  # System messages
+  - ".*changed the group name.*"
+  - ".*changed the group description.*"
+  - ".*changed their phone number.*"
+  - ".*left the group.*"
+  - ".*joined the group.*"
+
+include_patterns:
+  # Important system changes
+  - ".*added.*to the group"
+  - ".*removed.*from the group"
+  
+  # Messages with likely important content
+  - ".*http[s]?://.*"  # URLs
+  - ".*@everyone.*"     # Group mentions
+  - ".*#.*"            # Hashtags
+  
+  # Messages with specific indicators
+  - ".*deadline.*"
+  - ".*important.*"
+  - ".*urgent.*"
+  - ".*announcement.*"
+  - ".*decision.*"
+
+priority_rules:
+  high:
+    - "@everyone"
+    - "urgent"
+    - "ASAP"
+    - "emergency"
+  
+  medium:
+    - "important"
+    - "deadline"
+    - "update"
+    
+  low:
+    - "FYI"
+    - "heads up" 

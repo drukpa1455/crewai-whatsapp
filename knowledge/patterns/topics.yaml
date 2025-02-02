@@ -1,0 +1,67 @@
+topics:
+  - name: "Technical Discussion"
+    keywords:
+      - "bug"
+      - "error"
+      - "feature"
+      - "code"
+      - "implementation"
+      - "fix"
+      - "issue"
+      - "PR"
+      - "merge"
+      - "deploy"
+
+  - name: "Planning"
+    keywords:
+      - "meeting"
+      - "schedule"
+      - "deadline"
+      - "timeline"
+      - "milestone"
+      - "plan"
+      - "roadmap"
+      - "sprint"
+      - "goal"
+
+  - name: "Decision Making"
+    keywords:
+      - "decide"
+      - "decision"
+      - "agree"
+      - "approve"
+      - "consensus"
+      - "vote"
+      - "choose"
+      - "select"
+
+  - name: "Questions & Help"
+    keywords:
+      - "help"
+      - "question"
+      - "how to"
+      - "anyone"
+      - "??"
+      - "please assist"
+      - "support"
+      - "guidance"
+
+  - name: "Announcements"
+    keywords:
+      - "announcement"
+      - "attention"
+      - "important"
+      - "notice"
+      - "update"
+      - "alert"
+      - "FYI"
+      - "heads up"
+
+priority_indicators:
+  - "urgent"
+  - "important"
+  - "critical"
+  - "ASAP"
+  - "priority"
+  - "deadline"
+  - "blocker" 
